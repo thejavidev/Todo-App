@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style/main.css">
+  <title>Frontend Mentor | Todo app</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+</head>
+
+<body>
+  <div class="overlay"></div>
+  <div class="picture">
+    <img class="main-img" src="images/bg-desktop-light.jpg" alt="">
+  </div>
+  <section class="main container">
+
+    <div class="todo_list">
+      <div class="todo_text">
+        <h1>t o d o </h1>
+        <button id="btn-toggle" class="toggle-theme">
+          <img src='./images/icon-moon.svg' alt="">
+        </button>
+
+      </div>
+      <div class="todo_input">
+        <input class="create_todo" onkeydown="search(event)" type="text" placeholder="create new to do">
+        <button class="add_todo" onclick="addTodo()">Add</button>
+      </div>
+      <div class="todo_ul">
+        <ul class="todo_lists"></ul>
+        <div class="deleted-all">
+          <ul class="deleted-lists"></ul>
+          <button class="close"><i class="fa-solid fa-x"></i></button>
+        </div>
+        <p class="nodata">No data</p>
+        <div class="todo_category allcategory">
+          <p id="todosLeft">items left</p>
+          <div class="choice">
+            <p data-filter="all" class="actived">
+              All
+            </p>
+            <p data-filter="active">
+              Active
+            </p>
+            <p data-filter="completed">
+              Completed
+            </p>
+            <p data-filter="trash">
+              <i class="fa-solid fa-trash"></i>
+            </p>
+          </div>
+          <button data-clear="clear">
+            Clear Completed
+          </button>
+
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="notification"></div>
+
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

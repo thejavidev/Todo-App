@@ -1,0 +1,470 @@
+:root {
+    --body: hsl(0, 0%, 98%);
+    --text: #000;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    overflow-x: hidden;
+}
+
+.img {
+    width: 20px;
+    height: 20px;
+}
+
+body {
+    min-height: 100vh;
+}
+
+body.light {
+    background: hsl(0, 0%, 98%);
+    --body: hsl(0, 0%, 98%);
+    --text: #000;
+}
+
+body.dark {
+    background: hsl(235, 21%, 11%);
+    --body: #25273c;
+    --text: #fff;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+.textLine {
+    text-decoration: line-through;
+    opacity: .5;
+    color: #b0b0b0;
+}
+
+.flex {
+    display: flex;
+}
+
+.none {
+    display: none;
+}
+
+@mixin center {
+    display: flex;
+    align-items: center;
+}
+
+@mixin borderNone {
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+@mixin someClass {
+    display: flex;
+    flex-direction: column;
+    background: var(--body);
+    max-height: 300px;
+    overflow-y: scroll;
+    position: relative;
+}
+
+@mixin someClassLi {
+    background: var(--body);
+    border-bottom: 1px solid rgba(176, 176, 176, .4);
+    padding: 15px 20px;
+    overflow: hidden;
+    word-wrap: break-word;
+    position: relative;
+    min-height: 60px;
+}
+
+@mixin someClassH3 {
+    color: var(--text);
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+@mixin deleted {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    position: absolute;
+    top: 19px;
+    right: -100%;
+    cursor: pointer;
+    color: var(--text);
+    transition: all .3s ease;
+
+}
+.overlay{
+    display: none;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #28214170;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1002;
+    transition: all .4s ease;
+    &.active{
+        display: block;
+    }
+}
+.toggle-theme {
+    background: transparent;
+    @include borderNone();
+}
+
+.main-img {
+    width: 100%;
+    z-index: -2;
+    position: relative;
+    height: 300px;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #fff
+}
+
+.main {
+    @include center();
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+
+    .todo_list {
+        width: 500px;
+        margin-top: -220px;
+
+        .todo_text {
+            @include center();
+            justify-content: space-between;
+
+            h1 {
+                color: var(--text);
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                font-size: 30px;
+            }
+
+            img {
+                width: 20px;
+                cursor: pointer;
+            }
+        }
+
+        .todo_input {
+            margin-top: 25px;
+            background: var(--body);
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+
+            input {
+                width: 100%;
+                padding: 15px 20px;
+                border-radius: 5px;
+                @include borderNone();
+                text-transform: capitalize;
+
+            }
+
+            .add_todo {
+                position: absolute;
+                right: 0;
+                background: #000;
+                color: var(--text);
+                padding: 10px 20px;
+                cursor: pointer;
+                height: 100%;
+                background: var(--body);
+                border-radius: 5px;
+                @include borderNone();
+            }
+        }
+
+        .nodata {
+            color: #bcbcbc;
+            display: none;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .todo_ul {
+            margin-top: 20px;
+            background: var(--body);
+            position: relative;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+
+
+            .todo_lists {
+                @include someClass();
+
+                &:empty+.nodata {
+                    display: flex;
+                }
+
+                li {
+                    background: var(--body);
+                    border-bottom: 1px solid rgba(176, 176, 176, .4);
+                    padding: 15px 20px;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    position: relative;
+                    min-height: 60px;
+
+                    &.trash {
+                        display: none
+                    }
+
+                    div {
+                        @include center();
+                        width: 100%;
+
+                        h3 {
+                            @include someClassH3();
+                        }
+                    }
+
+                    justify-content: space-between;
+
+                    .delete {
+                       @include deleted();
+
+                        i {
+                            color: var(--text);
+                            font-size: 17px;
+                            cursor: pointer;
+
+                            &:hover {
+                                transition: all .3s ease;
+                                color: red;
+                            }
+                        }
+                    }
+
+
+                    &:hover {
+                        .delete {
+                            right: 20px;
+                            opacity: 1;
+                            visibility: visible;
+                        }
+                    }
+                }
+            }
+
+            .todo_category {
+                display: flex;
+                justify-content: space-between;
+                padding: 15px 20px;
+                margin-top: 25px;
+
+                * {
+                    color: var(--text)
+                }
+
+                .choice {
+                    @include center();
+                    gap: 10px;
+
+                    p {
+                        cursor: pointer;
+
+                        &.actived {
+                            color: blue;
+                            font-weight: 700;
+                        }
+
+                        i {
+                            color: red;
+                            margin-left: 10px;
+                            font-size: 13px;
+                        }
+                    }
+                }
+
+                button {
+                    color: var(--text);
+                    background: transparent;
+                    @include borderNone();
+                    cursor: pointer;
+                }
+            }
+
+            .deleted-all {
+                visibility: hidden;
+                position: absolute;
+                top: -100%;
+                height: 300px;
+                width: 100%;
+                background: var(--body);
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 200;
+                border: 2px solid #fff;
+                z-index: 1020;
+                transition: all .3s linear;
+                .deleted-lists {
+                    @include someClass();
+                    width: 100%;
+
+                    li {
+                        @include someClassLi();
+
+                        div {
+                            @include center();
+                            width: 100%;
+
+                            h3 {
+                                @include someClassH3();
+                            }
+                           
+                        }
+                        .restore,.trash-btn{
+                            @include deleted();
+                        }
+
+                        &:hover {
+                            .restore{
+                                right: 20px;
+                            }
+                            .trash-btn{
+                                right: 60px;
+                            }
+                        }
+                    }
+                }
+
+                &.active {
+                    visibility: visible;
+                    top: 50%
+                }
+
+                .close {
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    color: #fff;
+                    background: transparent;
+                }
+            }
+
+
+        }
+    }
+
+    .notification {
+        position: fixed;
+        top: -100%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        z-index: 10;
+        background-color: #ffff;
+
+        padding: 10px 20px;
+        transition: all .5s ease;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        text-transform: capitalize;
+
+        &.gr {
+            border: 3px solid green;
+        }
+
+        &.rd {
+            border: 3px solid red;
+        }
+
+        .icon {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &.green {
+                border: 1px solid green;
+
+                i {
+                    color: green;
+                    font-weight: 600;
+                }
+            }
+
+            &.red {
+                border: 1px solid red;
+
+                i {
+                    color: red;
+                }
+
+            }
+        }
+
+        &.right-0 {
+            top: 2rem;
+        }
+    }
+}
+
+@media screen and (max-width:991px) {
+    .main {
+
+        .todo_list {
+            margin-top: -100px;
+            position: relative;
+            padding: 0px;
+            padding: 20px;
+            width: 100%;
+
+
+            .todo_ul {
+
+                .todo_category {
+
+                    .choice {
+                        position: absolute;
+                        bottom: -50px;
+                        right: 0;
+                        padding: 10px 20px;
+                        text-align: center;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background: var(--body);
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+.d-none {
+    display: none !important;
+}
